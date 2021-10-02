@@ -1,14 +1,7 @@
 import { useEffect, useState } from "react";
 import DropdownLink from "./DropdownLink";
 import DropdownTitolo from "./DropdownTitolo";
-
-export interface DropdownProps {
-	nome: string;
-	voci: string[];
-	premutoLink: (e: any) => any;
-	classi?: string[];
-	classe?: string;
-}
+import {DropdownProps} from "./../../../interfaces";
 
 const Dropdown: React.FunctionComponent<DropdownProps> = ({ nome, voci, premutoLink, classi, classe }) => {
 	const [link, setLink] = useState<any[]>([]);
@@ -19,8 +12,7 @@ const Dropdown: React.FunctionComponent<DropdownProps> = ({ nome, voci, premutoL
 				return <DropdownLink classe={classeLink} premuto={premutoLink}>{voce}</DropdownLink>;
 			})
 		);
-	}, voci);
-	console.log(link);
+	}, [voci]);
 	return (
 		<>
 			<DropdownTitolo>{nome}</DropdownTitolo>

@@ -1,6 +1,5 @@
-export interface BenvenutoProps {
-  daMostrare:string;
-}
+import { BenvenutoProps } from "../../interfaces";
+
  
 const Benvenuto: React.FunctionComponent<BenvenutoProps> = ({daMostrare}) => {
   if(daMostrare!=="Benvenuto") return null;

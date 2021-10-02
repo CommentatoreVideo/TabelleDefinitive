@@ -1,58 +1,28 @@
-import { useEffect, useState } from "react";
-import { Todo, User } from "../../App";
+import { PerUtenteProps, User } from "../../interfaces";
+import Card from "../Card";
 
-export interface PerUtenteProps {
-	daMostrare: string;
-	todos: Todo[];
-	user: User|undefined;
-	setShowUser: (showUser: number) => any;
-	setDaMostrare: (daMostrare: string) => any;
-}
-
-const PerUtente: React.FunctionComponent<PerUtenteProps> = ({ daMostrare, todos, user, setShowUser, setDaMostrare }) => {
-	function premutoUsername(e: any) {
-		const classi: string[] = Array.from(e.target.classList as DOMTokenList);
-		for (const classe of classi) {
-			if (!classe.match(/^userId\d+$/)) continue;
-			setShowUser(Number(classe.substring(6)));
-			setDaMostrare("Utente");
+const PerUtente: React.FunctionComponent<PerUtenteProps> = ({ daMostrare, users, setDaMostrare }) => {
+	function premutaCard(e: any) {
+		for (const classe of e.target.classList as Array<string>) {
+			if (!classe.match(/^cardUserId\d+$/)) continue;
+			const id = classe.substring(10);
+			setDaMostrare(`TodoPerUtente${id}`);
 		}
 	}
-	const [righe, setRighe] = useState<any[]>([]);
-	useEffect(
-		function () {
-      if(user===undefined) return;
-			setRighe(
-				todos.filter(todo=>todo.userId===user.id).map(todo => {
-					return (
-						<tr>
-							<td className={`fakeLink userId${todo.userId}`} onClick={premutoUsername}>
-								{user.username}
-							</td>
-							<td>{todo.id}</td>
-							<td>{todo.title}</td>
-							<td>{todo.completed ? <i className="far fa-check-circle text-success"></i> : <i className="far fa-times-circle text-danger"></i>}</td>
-						</tr>
-					);
-				})
-			);
-		},
-		[todos,daMostrare]
-	);
-	if (!daMostrare.match(/^TodoPerUtente\d+$/)) return null;
-	return (
-		<table className="table">
-			<thead>
-				<tr>
-					<th>Utente</th>
-					<th>id</th>
-					<th>Titolo</th>
-					<th>Fatto</th>
-				</tr>
-			</thead>
-			<tbody>{righe}</tbody>
-		</table>
-	);
+	if (daMostrare !== "Per utente") return null;
+	const carte = users.map(user => {
+		return <Card colore="primary" classe={`cardUserId${user.id}`} body={user.username} footer="Visualizza todo" premuto={premutaCard}></Card>;
+	});
+	const righe = [];
+	let colonne: any[] = [];
+	for (const carta of carte) {
+		if (colonne.length === 3) {
+			righe.push(<div className="row">{colonne}</div>);
+			colonne = [];
+		}
+		colonne.push(<div className="col-4">{carta}</div>);
+	}
+	return <div className="mt-4">{righe}</div>;
 };
 
 export default PerUtente;
