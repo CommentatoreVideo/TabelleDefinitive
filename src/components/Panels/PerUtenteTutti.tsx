@@ -24,17 +24,22 @@ function getTbody(todos: Todo[]) {
 	return tbody;
 }
 
-function getTabella(todos: Todo[], indice: number) {
+function getTabella(dati: { user: User; todos: Todo[] }, indice: number) {
 	return (
 		<table key={indice} className="table">
-			<thead>{getThead(indice)}</thead>
-			<tbody>{getTbody(todos)}</tbody>
+			<thead>
+				<tr>
+					<th colSpan={3} className="text-center">{dati.user.username}</th>
+				</tr>
+				{getThead(indice)}
+			</thead>
+			<tbody>{getTbody(dati.todos)}</tbody>
 		</table>
 	);
 }
 
 function getTabelle(dati: { user: User; todos: Todo[] }[]) {
-	return dati.map(({ todos }, indice) => getTabella(todos, indice));
+	return dati.map(getTabella);
 }
 const PerUtenteTutti: React.FunctionComponent<PerUtenteTuttiProps> = ({ daMostrare, todos, users }) => {
 	if (daMostrare !== "Tutti per utente") return null;

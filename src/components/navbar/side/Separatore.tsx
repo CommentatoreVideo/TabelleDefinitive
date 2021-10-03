@@ -1,6 +1,4 @@
-import { SeparatoreProps } from "../../../interfaces";
-
-const Separatore: React.FunctionComponent<SeparatoreProps> = ({ children }) => {
+const Separatore: React.FunctionComponent<{}> = ({ children }) => {
 	return <div className="sb-sidenav-menu-heading">{children}</div>;
 };
 

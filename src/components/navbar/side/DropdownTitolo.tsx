@@ -1,6 +1,4 @@
-import { DropdownTitoloProps } from "../../../interfaces";
-
-const DropdownTitolo: React.FunctionComponent<DropdownTitoloProps> = ({ children }) => {
+const DropdownTitolo: React.FunctionComponent<{}> = ({ children }) => {
 	return (
 		<a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
 			{children}

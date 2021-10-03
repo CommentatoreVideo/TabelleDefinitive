@@ -25,7 +25,7 @@ const Grafico: React.FunctionComponent<GraficoProps> = ({ percentuali }) => {
 						},
 					},
 				},
-			}}></Pie>
+			}}/>
 	);
 };
 

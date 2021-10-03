@@ -6,22 +6,19 @@ const Tutti: React.FunctionComponent<TuttiProps> = ({ daMostrare, todos, users, 
 	function premutoUsername(e: any) {
 		const classi: string[] = Array.from(e.target.classList as DOMTokenList);
 		for (const classe of classi) {
-			if (!classe.match(/^userId\d+$/)) continue;
+			if (classe.match(/^userId\d+$/)===null) continue;
 			setDaMostrare(`InformazioniUtente${Number(classe.substring(6))}`);
 		}
 	}
 	const [righe, setRighe] = useState<any[]>([]);
-	useEffect(
-		function () {
-			setRighe(
-				todos.map((todo, indice) => {
-					const user = users.find(user => user.id === todo.userId);
-					return creaRigaTodo(todo, premutoUsername, user, indice);
-				})
-			);
-		},
-		[todos, users]
-	);
+	useEffect(() => {
+		setRighe(
+			todos.map((todo, indice) => {
+				const user = users.find(utente => utente.id === todo.userId);
+				return creaRigaTodo(todo, premutoUsername, user, indice);
+			})
+		);
+	}, [todos, users]);
 	if (daMostrare !== "Tutti") return null;
 	return (
 		<table className="table">

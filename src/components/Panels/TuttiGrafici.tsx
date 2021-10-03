@@ -1,14 +1,14 @@
 import Grafico from "../../Grafico";
 import { Todo, TuttiGraficiProps, User } from "../../interfaces";
 function creaGrafici(users: User[], todos: Todo[]) {
-	const grafici: Array<[JSX.Element, User]> = [];
+	const grafici: [JSX.Element,User][] = [];
 	let indice = 0;
 	for (const user of users) {
 		const todosFiltrati = todos.filter(todo => todo.userId === user.id);
 		let fatti = todosFiltrati.reduce((tot, todo) => tot + (todo.completed ? 1 : 0), 0);
 		const daFare = (todosFiltrati.length - fatti) / todosFiltrati.length;
 		fatti /= todosFiltrati.length;
-		grafici.push([<Grafico key={indice++} percentuali={[daFare * 100, fatti * 100]}></Grafico>, user]);
+		grafici.push([<Grafico key={indice++} percentuali={[daFare * 100, fatti * 100]}/>, user]);
 	}
 	return grafici;
 }

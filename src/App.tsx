@@ -7,7 +7,6 @@ import TopNavbar from "./components/navbar/top/TopNavbar";
 import SideNav from "./components/navbar/side/SideNav";
 import Benvenuto from "./components/Panels/Benvenuto";
 import Tutti from "./components/Panels/Tutti";
-import Utente from "./components/Panels/Utente";
 import PerUtenteTutti from "./components/Panels/PerUtenteTutti";
 import TodoPerUtente from "./components/Panels/TodoPerUtente";
 import { Todo, User } from "./interfaces";
@@ -33,12 +32,12 @@ function App() {
 	const [users, setUsers] = useState<User[]>([]);
 	const [todos, setTodos] = useState<Todo[]>([]);
 	const [daMostrare, setDaMostrare] = useState("Loading");
-	useEffect(function () {
-		(async function () {
-			const todos = await getTodos();
-			const users = await getUsers();
-			setUsers(users);
-			setTodos(todos);
+	useEffect(() => {
+		(async () => {
+			const todosOttenuti = await getTodos();
+			const usersOttenuti = await getUsers();
+			setTodos(todosOttenuti);
+			setUsers(usersOttenuti);
 			setDaMostrare("Benvenuto");
 		})();
 	}, []);

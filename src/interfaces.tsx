@@ -10,12 +10,10 @@ export interface DropdownLinkProps {
 	premuto: (e: any) => any;
 	classe?: string;
 }
-export interface DropdownTitoloProps {}
 export interface LinkSempliceProps {
 	setDaMostrare: (daMostrare: string) => any;
 	children: string;
 }
-export interface SeparatoreProps {}
 export interface SideNavProps {
 	utenti: User[];
 	setDaMostrare: (daMostrare: string) => any;
@@ -56,24 +54,24 @@ export interface CardProps {
 	classe?: string;
 	premuto?: (e: any) => any;
 }
-export type Geo = {
+export interface Geo {
 	lat: string;
 	lng: string;
-};
-export type Address = {
+}
+export interface Address {
 	street: string;
 	suite: string;
 	city: string;
 	zipcode: string;
 	geo: Geo;
 	[index: string]: number | string | Address | Company | Geo;
-};
-export type Company = {
+}
+export interface Company {
 	name: string;
 	catchPhrase: string;
 	bs: string;
 	[index: string]: number | string | Address | Company;
-};
+}
 export interface User {
 	id: number;
 	name: string;

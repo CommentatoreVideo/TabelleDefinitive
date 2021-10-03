@@ -39,7 +39,7 @@ function creaTabella(data: any) {
 
 const InformazioniUtente: React.FunctionComponent<InformazioniUtenteProps> = ({ daMostrare, users, setDaMostrare }) => {
 	if (!daMostrare.match(/^InformazioniUtente\d+$/)) return null;
-	const user = users.find(user => user.id === Number(daMostrare.substring(18)));
+	const user = users.find(utente => utente.id === Number(daMostrare.substring(18)));
 	if (user === undefined) return null;
 	function premutoCard() {
 		setDaMostrare(`TodoPerUtente${user?.id}`);

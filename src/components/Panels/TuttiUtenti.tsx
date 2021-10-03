@@ -4,8 +4,8 @@ import { creaRighe } from "../../colonne";
 
 const TuttiUtenti: React.FunctionComponent<TuttiUtentiProps> = ({ daMostrare, setDaMostrare, users }) => {
 	function premutaCard(e: any) {
-		for (const classe of e.target.classList as Array<string>) {
-			if (!classe.match(/^cardUserId\d+$/)) continue;
+		for (const classe of e.target.classList as string[]) {
+			if (classe.match(/^cardUserId\d+$/)===null) continue;
 			setDaMostrare(`InformazioniUtente${classe.substring(10)}`);
 		}
 	}
