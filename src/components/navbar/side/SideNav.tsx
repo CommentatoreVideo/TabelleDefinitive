@@ -12,6 +12,10 @@ const SideNav: React.FunctionComponent<SideNavProps> = ({ utenti, setDaMostrare 
 						<LinkSemplice setDaMostrare={setDaMostrare}>Tutti</LinkSemplice>
 						<LinkSemplice setDaMostrare={setDaMostrare}>Per utente</LinkSemplice>
 						<LinkSemplice setDaMostrare={setDaMostrare}>Tutti per utente</LinkSemplice>
+						<Separatore>Grafici</Separatore>
+						<LinkSemplice setDaMostrare={setDaMostrare}>Tutti grafici</LinkSemplice>
+						<Separatore>Utenti</Separatore>
+						<LinkSemplice setDaMostrare={setDaMostrare}>Tutti gli utenti</LinkSemplice>
 					</div>
 				</div>
 			</nav>
@@ -21,11 +25,3 @@ const SideNav: React.FunctionComponent<SideNavProps> = ({ utenti, setDaMostrare 
 
 export default SideNav;
 
-function estraiUserIdDaClassList(classList: DOMTokenList) {
-	const classi = Array.from(classList);
-	for (const classe of classi) {
-		if (!classe.match(/^TodoPerUtente\d+$/)) continue;
-		return Number(classe.substring(13));
-	}
-	return -1;
-}

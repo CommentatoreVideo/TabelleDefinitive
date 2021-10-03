@@ -21,7 +21,7 @@ const Tutti: React.FunctionComponent<TuttiProps> = ({ daMostrare, todos, users, 
 				})
 			);
 		},
-		[todos]
+		[todos,users]
 	);
 	if (daMostrare !== "Tutti") return null;
 	return (

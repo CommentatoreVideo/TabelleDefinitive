@@ -28,6 +28,7 @@ export interface TodoPerUtenteProps {
 	daMostrare: string;
 	todos: Todo[];
 	user: User | undefined;
+	setDaMostrare:(daMostrare:string)=>any;
 }
 
 export interface PerUtenteTuttiProps {
@@ -53,31 +54,37 @@ export interface CardProps {
 	colore: string;
 	body: string;
 	footer: string;
-	classe?:string;
-	premuto?:(e:any)=>any;
+	classe?: string;
+	premuto?: (e: any) => any;
 }
+export type Geo = {
+	lat: string;
+	lng: string;
+};
+export type Address = {
+	street: string;
+	suite: string;
+	city: string;
+	zipcode: string;
+	geo: Geo;
+	[index: string]: number | string | Address | Company | Geo;
+};
+export type Company = {
+	name: string;
+	catchPhrase: string;
+	bs: string;
+	[index: string]: number | string | Address | Company;
+};
 export interface User {
 	id: number;
 	name: string;
 	username: string;
 	email: string;
-	address: {
-		street: string;
-		suite: string;
-		city: string;
-		zipcode: string;
-		geo: {
-			lat: string;
-			lng: string;
-		};
-	};
+	address: Address;
 	phone: string;
 	website: string;
-	company: {
-		name: string;
-		catchPhrase: string;
-		bs: string;
-	};
+	company: Company;
+	[index: string]: number | string | Address | Company;
 }
 
 export interface Todo {
@@ -88,10 +95,16 @@ export interface Todo {
 	[index: string]: number | string | boolean;
 }
 export interface LoadingProps {
-	daMostrare:string;
+	daMostrare: string;
 }
 
 export interface PerUtenteProps {
+	daMostrare: string;
+	users: User[];
+	setDaMostrare: (daMostrare: string) => any;
+}
+
+export interface InformazioniUtenteProps {
 	daMostrare: string;
 	users: User[];
 	setDaMostrare:(daMostrare:string)=>any;

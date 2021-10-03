@@ -4,7 +4,6 @@ import "./scripts.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
 import TopNavbar from "./components/navbar/top/TopNavbar";
-import Card from "./components/Card";
 import SideNav from "./components/navbar/side/SideNav";
 import Benvenuto from "./components/Panels/Benvenuto";
 import Tutti from "./components/Panels/Tutti";
@@ -14,6 +13,9 @@ import TodoPerUtente from "./components/Panels/TodoPerUtente";
 import { Todo, User } from "./interfaces";
 import Loading from "./components/Panels/Loading";
 import PerUtente from "./components/Panels/PerUtente";
+import TuttiGrafici from "./components/Panels/TuttiGrafici";
+import TuttiUtenti from "./components/Panels/TuttiUtenti";
+import InformazioniUtente from "./components/Panels/InformazioniUtente";
 const todosUrl = "https://jsonplaceholder.typicode.com/todos";
 const usersUrl = "https://jsonplaceholder.typicode.com/users";
 async function getTodos(): Promise<Todo[]> {
@@ -54,8 +56,11 @@ function App() {
 							<Tutti daMostrare={daMostrare} todos={todos} users={users} setShowUser={setShowUser} setDaMostrare={setDaMostrare} />
 							<Utente userId={showUser} users={users} daMostrare={daMostrare} />
 							<PerUtenteTutti daMostrare={daMostrare} todos={todos} users={users} />
-							<TodoPerUtente daMostrare={daMostrare} todos={todos} user={users.find(user => user.id === Number(daMostrare.substring(13)))} />
+							<TodoPerUtente setDaMostrare={setDaMostrare} daMostrare={daMostrare} todos={todos} user={users.find(user => user.id === Number(daMostrare.substring(13)))} />
 							<PerUtente daMostrare={daMostrare} users={users} setDaMostrare={setDaMostrare} />
+							<TuttiGrafici daMostrare={daMostrare} users={users} todos={todos}></TuttiGrafici>
+							<TuttiUtenti daMostrare={daMostrare} users={users} setDaMostrare={setDaMostrare}></TuttiUtenti>
+							<InformazioniUtente daMostrare={daMostrare} users={users} setDaMostrare={setDaMostrare}></InformazioniUtente>
 						</div>
 					</main>
 				</div>

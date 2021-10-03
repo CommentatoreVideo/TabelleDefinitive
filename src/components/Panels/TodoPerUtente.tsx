@@ -1,21 +1,28 @@
 import { useEffect, useState } from "react";
 import { TodoPerUtenteProps, Todo } from "../../interfaces";
+import Card from "../Card";
 
-const TodoPerUtente: React.FunctionComponent<TodoPerUtenteProps> = ({ daMostrare, todos, user }) => {
+const TodoPerUtente: React.FunctionComponent<TodoPerUtenteProps> = ({ daMostrare, todos, user,setDaMostrare }) => {
 	const [righe, setRighe] = useState<any[]>([]);
+	function premutoCard() {
+		setDaMostrare(`InformazioniUtente${user?.id}`);
+	}
 	useEffect(
 		function () {
 			if (user === undefined) return;
 			setRighe(todos.filter(todo => todo.userId === user.id).map(todo => creaRiga(todo)));
 		},
-		[todos, daMostrare]
+		[todos, daMostrare, user]
 	);
 	if (!daMostrare.match(/^TodoPerUtente\d+$/)) return null;
 	return (
-		<table className="table">
-			<thead>{getThead()}</thead>
-			<tbody>{righe}</tbody>
-		</table>
+		<div className="mt-4">
+			<Card body={user?.username || ""} footer="Premi per visualizzare le informazioni sull'utente" colore="primary" premuto={premutoCard}></Card>
+			<table className="table">
+				<thead>{getThead()}</thead>
+				<tbody>{righe}</tbody>
+			</table>
+		</div>
 	);
 };
 

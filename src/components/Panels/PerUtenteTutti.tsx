@@ -47,6 +47,8 @@ const PerUtenteTutti: React.FunctionComponent<PerUtenteTuttiProps> = ({ daMostra
 		}
 		colonne.push(<div className="col-4">{tabella}</div>);
 	}
+  if(colonne.length!==0) righe.push(<div className="row">{colonne}</div>)
+	
 	return <div>{righe}</div>;
 };
 
