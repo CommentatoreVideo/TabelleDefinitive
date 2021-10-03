@@ -1,9 +1,10 @@
+import { creaRighe } from "../../colonne";
 import { Todo, User } from "../../interfaces";
 import { PerUtenteTuttiProps } from "../../interfaces";
 
-function getThead() {
+function getThead(indice: number) {
 	return (
-		<tr>
+		<tr key={indice}>
 			<th>Id</th>
 			<th>Titolo</th>
 			<th>Fatto</th>
@@ -23,33 +24,22 @@ function getTbody(todos: Todo[]) {
 	return tbody;
 }
 
-function getTabella(todos: Todo[]) {
+function getTabella(todos: Todo[], indice: number) {
 	return (
-		<table className="table">
-			<thead>{getThead()}</thead>
+		<table key={indice} className="table">
+			<thead>{getThead(indice)}</thead>
 			<tbody>{getTbody(todos)}</tbody>
 		</table>
 	);
 }
 
 function getTabelle(dati: { user: User; todos: Todo[] }[]) {
-	return dati.map(({ todos }) => getTabella(todos));
+	return dati.map(({ todos }, indice) => getTabella(todos, indice));
 }
 const PerUtenteTutti: React.FunctionComponent<PerUtenteTuttiProps> = ({ daMostrare, todos, users }) => {
 	if (daMostrare !== "Tutti per utente") return null;
 	const tabelle = getTabelle(organizzaDati(users, todos));
-	const righe = [];
-	let colonne: any[] = [];
-	for (const tabella of tabelle) {
-		if (colonne.length === 3) {
-			righe.push(<div className="row">{colonne}</div>);
-			colonne = [];
-		}
-		colonne.push(<div className="col-4">{tabella}</div>);
-	}
-  if(colonne.length!==0) righe.push(<div className="row">{colonne}</div>)
-	
-	return <div>{righe}</div>;
+	return <div>{creaRighe(tabelle)}</div>;
 };
 
 function organizzaDati(users: User[], todos: Todo[]) {

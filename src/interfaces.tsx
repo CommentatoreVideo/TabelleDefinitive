@@ -28,7 +28,7 @@ export interface TodoPerUtenteProps {
 	daMostrare: string;
 	todos: Todo[];
 	user: User | undefined;
-	setDaMostrare:(daMostrare:string)=>any;
+	setDaMostrare: (daMostrare: string) => any;
 }
 
 export interface PerUtenteTuttiProps {
@@ -41,7 +41,6 @@ export interface TuttiProps {
 	daMostrare: string;
 	todos: Todo[];
 	users: User[];
-	setShowUser: (showUser: number) => any;
 	setDaMostrare: (daMostrare: string) => any;
 }
 export interface UtenteProps {
@@ -107,5 +106,16 @@ export interface PerUtenteProps {
 export interface InformazioniUtenteProps {
 	daMostrare: string;
 	users: User[];
-	setDaMostrare:(daMostrare:string)=>any;
+	setDaMostrare: (daMostrare: string) => any;
+}
+
+export interface TuttiGraficiProps {
+	daMostrare: string;
+	todos: Todo[];
+	users: User[];
+}
+export interface TuttiUtentiProps {
+	daMostrare: string;
+	setDaMostrare: (daMostrare: string) => any;
+	users: User[];
 }

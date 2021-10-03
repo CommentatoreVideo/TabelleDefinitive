@@ -1,18 +1,24 @@
 import { useEffect, useState } from "react";
 import DropdownLink from "./DropdownLink";
 import DropdownTitolo from "./DropdownTitolo";
-import {DropdownProps} from "./../../../interfaces";
+import { DropdownProps } from "./../../../interfaces";
 
 const Dropdown: React.FunctionComponent<DropdownProps> = ({ nome, voci, premutoLink, classi, classe }) => {
 	const [link, setLink] = useState<any[]>([]);
-	useEffect(function () {
-		setLink(
-			voci.map((voce, indice) => {
-				const classeLink=classi!==undefined?classi[indice]:classe;
-				return <DropdownLink classe={classeLink} premuto={premutoLink}>{voce}</DropdownLink>;
-			})
-		);
-	}, [voci]);
+	useEffect(
+		function () {
+			setLink(
+				voci.map((voce, indice) => {
+					return (
+						<DropdownLink classe={classi !== undefined ? classi[indice] : classe} premuto={premutoLink}>
+							{voce}
+						</DropdownLink>
+					);
+				})
+			);
+		},
+		[voci]
+	);
 	return (
 		<>
 			<DropdownTitolo>{nome}</DropdownTitolo>

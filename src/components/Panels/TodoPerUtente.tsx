@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { TodoPerUtenteProps, Todo } from "../../interfaces";
 import Card from "../Card";
 
-const TodoPerUtente: React.FunctionComponent<TodoPerUtenteProps> = ({ daMostrare, todos, user,setDaMostrare }) => {
+const TodoPerUtente: React.FunctionComponent<TodoPerUtenteProps> = ({ daMostrare, todos, user, setDaMostrare }) => {
 	const [righe, setRighe] = useState<any[]>([]);
 	function premutoCard() {
 		setDaMostrare(`InformazioniUtente${user?.id}`);
@@ -10,7 +10,7 @@ const TodoPerUtente: React.FunctionComponent<TodoPerUtenteProps> = ({ daMostrare
 	useEffect(
 		function () {
 			if (user === undefined) return;
-			setRighe(todos.filter(todo => todo.userId === user.id).map(todo => creaRiga(todo)));
+			setRighe(todos.filter(todo => todo.userId === user.id).map((todo, indice) => creaRiga(todo, indice)));
 		},
 		[todos, daMostrare, user]
 	);
@@ -28,9 +28,9 @@ const TodoPerUtente: React.FunctionComponent<TodoPerUtenteProps> = ({ daMostrare
 
 export default TodoPerUtente;
 
-function creaRiga(todo: Todo) {
+function creaRiga(todo: Todo, indice: number) {
 	return (
-		<tr>
+		<tr key={indice}>
 			<td>{todo.id}</td>
 			<td>{todo.title}</td>
 			<td>{todo.completed ? <i className="far fa-check-circle text-success"></i> : <i className="far fa-times-circle text-danger"></i>}</td>

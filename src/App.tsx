@@ -32,7 +32,6 @@ async function getUsers(): Promise<User[]> {
 function App() {
 	const [users, setUsers] = useState<User[]>([]);
 	const [todos, setTodos] = useState<Todo[]>([]);
-	const [showUser, setShowUser] = useState(-1);
 	const [daMostrare, setDaMostrare] = useState("Loading");
 	useEffect(function () {
 		(async function () {
@@ -53,8 +52,7 @@ function App() {
 					<main>
 						<div className="container-fluid px-4">
 							<Benvenuto daMostrare={daMostrare}></Benvenuto>
-							<Tutti daMostrare={daMostrare} todos={todos} users={users} setShowUser={setShowUser} setDaMostrare={setDaMostrare} />
-							<Utente userId={showUser} users={users} daMostrare={daMostrare} />
+							<Tutti daMostrare={daMostrare} todos={todos} users={users} setDaMostrare={setDaMostrare} />
 							<PerUtenteTutti daMostrare={daMostrare} todos={todos} users={users} />
 							<TodoPerUtente setDaMostrare={setDaMostrare} daMostrare={daMostrare} todos={todos} user={users.find(user => user.id === Number(daMostrare.substring(13)))} />
 							<PerUtente daMostrare={daMostrare} users={users} setDaMostrare={setDaMostrare} />

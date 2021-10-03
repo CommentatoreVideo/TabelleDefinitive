@@ -1,3 +1,4 @@
+import { creaRighe } from "../../colonne";
 import { PerUtenteProps } from "../../interfaces";
 import Card from "../Card";
 
@@ -10,20 +11,10 @@ const PerUtente: React.FunctionComponent<PerUtenteProps> = ({ daMostrare, users,
 		}
 	}
 	if (daMostrare !== "Per utente") return null;
-	const carte = users.map(user => {
-		return <Card colore="primary" classe={`cardUserId${user.id}`} body={user.username} footer="Visualizza todo" premuto={premutaCard}></Card>;
+	const carte = users.map((user, indice) => {
+		return <Card key={indice} colore="primary" classe={`cardUserId${user.id}`} body={user.username} footer="Visualizza todo" premuto={premutaCard}></Card>;
 	});
-	const righe = [];
-	let colonne: any[] = [];
-	for (const carta of carte) {
-		if (colonne.length === 3) {
-			righe.push(<div className="row">{colonne}</div>);
-			colonne = [];
-		}
-		colonne.push(<div className="col-4">{carta}</div>);
-	}
-  if(colonne.length!==0) righe.push(<div className="row">{colonne}</div>)
-	return <div className="mt-4">{righe}</div>;
+	return <div className="mt-4">{creaRighe(carte)}</div>;
 };
 
 export default PerUtente;

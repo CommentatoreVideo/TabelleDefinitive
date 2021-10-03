@@ -2,21 +2,25 @@ import { InformazioniUtenteProps } from "../../interfaces";
 import Card from "../Card";
 
 function creaTabella(data: any) {
-  function premutoTh(e:any) {
-    const celle=e.target.parentNode.children;
-    for(const cella of celle) {
-      if(cella.attributes["aria-tipo"].value==="sbagliato") continue;
-      console.log(cella,cella.attributes["aria-tipo"].value);
-      cella.hidden=!cella.hidden;
-    }
-  }
+	function premutoTh(e: any) {
+		const celle = e.target.parentNode.children;
+		for (const cella of celle) {
+			if (cella.attributes["aria-tipo"].value === "giusto") cella.hidden = !cella.hidden;
+		}
+	}
 	const tbody = [];
 	for (const chiave in data) {
 		tbody.push(
 			<tr>
-				<th aria-tipo="sbagliato" onClick={premutoTh} style={{cursor:"pointer"}}>{chiave}</th>
-				<td aria-tipo="giusto" hidden={false}>{typeof data[chiave] !== "object" ? data[chiave] : creaTabella(data[chiave])}</td>
-				<td aria-tipo="giusto" hidden={true}>...</td>
+				<th aria-tipo="sbagliato" onClick={premutoTh} style={{ cursor: "pointer" }}>
+					{chiave}
+				</th>
+				<td aria-tipo="giusto" hidden={false}>
+					{typeof data[chiave] !== "object" ? data[chiave] : creaTabella(data[chiave])}
+				</td>
+				<td aria-tipo="giusto" hidden={true}>
+					...
+				</td>
 			</tr>
 		);
 	}
@@ -33,13 +37,13 @@ function creaTabella(data: any) {
 	);
 }
 
-const InformazioniUtente: React.FunctionComponent<InformazioniUtenteProps> = ({ daMostrare, users,setDaMostrare }) => {
+const InformazioniUtente: React.FunctionComponent<InformazioniUtenteProps> = ({ daMostrare, users, setDaMostrare }) => {
 	if (!daMostrare.match(/^InformazioniUtente\d+$/)) return null;
 	const user = users.find(user => user.id === Number(daMostrare.substring(18)));
 	if (user === undefined) return null;
-  function premutoCard() {
-    setDaMostrare(`TodoPerUtente${user?.id}`);
-  }
+	function premutoCard() {
+		setDaMostrare(`TodoPerUtente${user?.id}`);
+	}
 	return (
 		<div>
 			{creaTabella(user)}
